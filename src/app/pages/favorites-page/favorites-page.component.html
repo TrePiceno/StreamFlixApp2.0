@@ -1,0 +1,29 @@
+<div class="favorites-container">
+    <h1>Mis Favoritos</h1>
+
+    <div *ngIf="loading && !isDeleting" class="loading-indicator">Cargando favoritos...</div>
+    <div *ngIf="isDeleting" class="loading-indicator">Eliminando...</div>
+
+
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+    <div *ngIf="!loading && favoriteItems.length === 0 && !error" class="no-favorites">
+        Aún no tienes elementos marcados como favoritos.
+    </div>
+
+    <div *ngIf="!loading && favoriteItems.length > 0" class="items-list favorites-grid">
+        <div *ngFor="let item of favoriteItems" class="item-card">
+            <a [routerLink]="['/details', item.itemId]">
+                <img [src]="item.imagen" [alt]="item.titulo" class="item-image">
+                <div class="item-title">{{ item.titulo }}</div>
+            </a>
+            <button (click)="confirmRemoveFavorite(item); $event.stopPropagation();"
+                class="favorite-button remove-button" [disabled]="isDeleting">
+                ❌ </button>
+        </div>
+    </div>
+
+    <app-confirm-modal *ngIf="showConfirmModal" [itemToDelete]="itemToDelete" (confirmed)="handleConfirmation($event)"
+        (cancelled)="handleCancellation()"></app-confirm-modal>
+
+    </div>

@@ -1,0 +1,18 @@
+<header class="app-header">
+    <div class="header-content">
+        <div class="app-title">
+            <a [routerLink]="['/catalog']">StreamFlixApp</a>
+        </div>
+
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a [routerLink]="['/catalog']" routerLinkActive="active">Catálogo</a></li>
+                <li><a [routerLink]="['/favorites']" routerLinkActive="active">Favoritos</a></li>
+                <li class="user-greeting" *ngIf="userName">Hola, {{ userName }}</li>
+
+            </ul>
+
+            <button (click)="logout()" class="btn btn-secondary">Cerrar Sesión</button>
+        </nav>
+    </div>
+    </header>

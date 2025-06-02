@@ -1,0 +1,36 @@
+<div class="detail-container">
+    <div class="detail-controls">
+        <button (click)="goBack()" class="btn btn-secondary back-button">Regresar</button>
+    </div>
+
+
+    <div *ngIf="loading && !item && !error" class="loading-indicator">Cargando detalles...</div>
+    <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+    <div *ngIf="!loading && !item && !error" class="no-item-found">El ítem solicitado no se encontró.</div>
+
+
+    <div *ngIf="item" class="item-presentation-area">
+        <div class="item-image-section">
+            <img [src]="item.imagenDetalle || item.imagen" [alt]="item.titulo" class="detail-image">
+            <div class="gradient-overlay"></div>
+            <button (click)="toggleFavorite(); $event.stopPropagation();"
+                class="favorite-button detail-favorite-button">
+                <span *ngIf="item.esFavorito">❤️</span>
+                <span *ngIf="!item.esFavorito">🤍</span>
+            </button>
+        </div>
+
+        <div class="item-info-overlay">
+            <h2>{{ item.titulo }}</h2>
+            <p><strong>Año:</strong> {{ item.anio }}</p>
+            <p><strong>Director:</strong> {{ item.director }}</p>
+            <p><strong>Género:</strong> {{ item.genero }}</p>
+            <p><strong>Categoría:</strong> {{ item.categoria === 'pelicula' ? 'Película' : 'Serie' }}</p>
+            <div class="synopsis-section">
+                <h3>Sinopsis:</h3>
+                <p>{{ item.sinopsis }}</p>
+            </div>
+        </div>
+    </div>
+
+    </div>
